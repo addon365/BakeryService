@@ -13,10 +13,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.addon.BakeryService.models.Customer;
-import com.addon.BakeryService.models.SalesOrder;
 import com.addon.BakeryService.models.OrderItem;
 import com.addon.BakeryService.models.OrderStatus;
 import com.addon.BakeryService.models.Product;
+import com.addon.BakeryService.models.SalesOrder;
 import com.addon.BakeryService.models.Shop;
 import com.addon.BakeryService.models.repos.CustomerRepository;
 import com.addon.BakeryService.models.repos.OrderRepository;
@@ -37,41 +37,39 @@ public class BakeryServiceApplication implements CommandLineRunner {
 	CustomerRepository customerRepository;
 	@Autowired
 	OrderRepository orderRepository;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(BakeryServiceApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		Customer customer=new Customer("Rahul","9999999999","2222222222");
+
+		Customer customer = new Customer("Rahul", "9999999999", "2222222222");
 		customerRepository.save(customer);
-		
-		
-		List<Shop> shops=new ArrayList<Shop>(3);
-		shops.add(new Shop("Saidapet","Madhura"));
-		shops.add(new Shop("Choolaimedu","Cauvery"));
-		shops.add(new Shop("Choolaimedu","Yamunai"));
+
+		List<Shop> shops = new ArrayList<Shop>(3);
+		shops.add(new Shop("Saidapet", "Madhura"));
+		shops.add(new Shop("Choolaimedu", "Cauvery"));
+		shops.add(new Shop("Choolaimedu", "Yamunai"));
 		shopRepository.saveAll(shops);
-		
-		List<OrderStatus> orderStatuses=new ArrayList<OrderStatus>(4);
-		orderStatuses.add(new OrderStatus("Delivered","D"));
-		orderStatuses.add(new OrderStatus("InProduction","IP"));
-		orderStatuses.add(new OrderStatus("InStock","IS"));
-		orderStatuses.add(new OrderStatus("Pending","P"));
+
+		List<OrderStatus> orderStatuses = new ArrayList<OrderStatus>(4);
+		orderStatuses.add(new OrderStatus("Delivered", "D"));
+		orderStatuses.add(new OrderStatus("InProduction", "IP"));
+		orderStatuses.add(new OrderStatus("InStock", "IS"));
+		orderStatuses.add(new OrderStatus("Pending", "P"));
 		orderStatusRepository.saveAll(orderStatuses);
-		
-		List<Product> products=new ArrayList<Product>(2);
-		products.add(new Product("CupCake",10.00));
-		products.add(new Product("Bread",25.00));
+
+		List<Product> products = new ArrayList<Product>(2);
+		products.add(new Product("CupCake", 10.00));
+		products.add(new Product("Bread", 25.00));
 		productRepository.saveAll(products);
-		
-		
-		Set<OrderItem> orderItems=new HashSet<OrderItem>(2);
-		orderItems.add(new OrderItem(products.get(0),10,2));
-		orderItems.add(new OrderItem(products.get(1),25,2));
-		SalesOrder order=new SalesOrder();
+
+		Set<OrderItem> orderItems = new HashSet<OrderItem>(2);
+		orderItems.add(new OrderItem(products.get(0), 10, 2));
+		orderItems.add(new OrderItem(products.get(1), 25, 2));
+		SalesOrder order = new SalesOrder();
 		order.setCustomer(customer);
 		order.setAdvance(200);
 		order.setTotal(0);
@@ -81,11 +79,10 @@ public class BakeryServiceApplication implements CommandLineRunner {
 		order.setExpectedTime(LocalTime.of(11, 20));
 		order.setShop(shops.get(0));
 		order.setOrderStatus(orderStatuses.get(0));
-		
+
 		order.setOrderItems(orderItems);
 		orderRepository.save(order);
-		
+
 	}
-	
-	
+
 }
