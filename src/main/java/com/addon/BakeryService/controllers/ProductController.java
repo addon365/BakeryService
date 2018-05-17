@@ -14,17 +14,18 @@ import com.addon.BakeryService.models.repos.ProductRepository;
 
 @RestController
 @RequestMapping("/api/product")
+
 @CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
 	@Autowired
 	ProductRepository productRepository;
 
-	@GetMapping("/all")
+	@GetMapping("get")
 	public @ResponseBody Iterable<Product> getAll() {
 		return productRepository.findAll();
 	}
 
-	@PostMapping("/add")
+	@PostMapping("add")
 	public Product add(@RequestBody Product product) {
 
 		productRepository.save(product);

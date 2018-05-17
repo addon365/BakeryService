@@ -10,6 +10,7 @@ public class Product {
 	
 	private long id;
 	private String name;
+	private int quantity;
 	private double price;
 	
 	public Product()
@@ -17,6 +18,14 @@ public class Product {
 		
 	}
 	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	public Product(String name,double price) {
 		this.name=name;
 		this.price=price;
