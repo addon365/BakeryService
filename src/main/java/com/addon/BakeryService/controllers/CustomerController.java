@@ -25,6 +25,12 @@ public class CustomerController {
 			@RequestParam(value = "mobile", defaultValue = "99999999") String mobile) {
 		return customerRepository.findByMobile(mobile);
 	}
+
+	@GetMapping("/get")
+	public @ResponseBody Iterable<Customer> getAll() {
+		return customerRepository.findAll();
+	}
+
 	public Customer add(@RequestBody Customer customer) {
 		return customerRepository.save(customer);
 	}
