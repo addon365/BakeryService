@@ -3,6 +3,7 @@ package com.addon.BakeryService.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,5 +24,8 @@ public class CustomerController {
 	public @ResponseBody Customer findCustomerByMobile(
 			@RequestParam(value = "mobile", defaultValue = "99999999") String mobile) {
 		return customerRepository.findByMobile(mobile);
+	}
+	public Customer add(@RequestBody Customer customer) {
+		return customerRepository.save(customer);
 	}
 }
