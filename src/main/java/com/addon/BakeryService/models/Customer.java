@@ -16,6 +16,9 @@ public class Customer {
 	private String alternateMobile;
 	
 	public Customer() {}
+	public Customer(Long id) {
+		this.id=id;
+	}
 	public Customer(String name,String mobile,String alternateMobile) {
 		this.name=name;
 		this.mobile=mobile;

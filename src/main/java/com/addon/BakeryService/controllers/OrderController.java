@@ -38,9 +38,11 @@ public class OrderController {
 
 	@PostMapping("/add")
 	public @ResponseBody SalesOrder add(@RequestBody SalesOrder salesOrder) {
-		
+
 		Customer customer = salesOrder.getCustomer();
-		if (customer.getId() == -1) {
+		if (customer == null) {
+			salesOrder.setCustomer(new Customer(1L));
+		} else if (customer.getId() == -1) {
 			customer = customerRepository.save(customer);
 			salesOrder.setCustomer(customer);
 		}
