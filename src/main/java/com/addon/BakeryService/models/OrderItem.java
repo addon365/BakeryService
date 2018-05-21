@@ -19,7 +19,7 @@ public class OrderItem {
 	private Product product;
 	
 	private double price;
-	private int quatity;
+	private int quantity;
 	private SalesOrder order;
 	
 	public OrderItem() {
@@ -29,7 +29,7 @@ public class OrderItem {
 	public OrderItem(Product product,double price,int quantity) {
 		this.product=product;
 		this.price=price;
-		this.quatity=quantity;
+		this.quantity=quantity;
 	}
 	
 	@ManyToOne
@@ -63,10 +63,10 @@ public class OrderItem {
 		this.price = price;
 	}
 	public int getQuatity() {
-		return quatity;
+		return quantity;
 	}
 	public void setQuatity(int quatity) {
-		this.quatity = quatity;
+		this.quantity = quatity;
 	}
 
 	
