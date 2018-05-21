@@ -45,13 +45,13 @@ public class BakeryServiceApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Customer customer = new Customer("Rahul", "9999999999", "2222222222");
+		Customer customer = new Customer("Dummy", "9999999999", "2222222222");
 		customerRepository.save(customer);
 
 		List<Shop> shops = new ArrayList<Shop>(3);
-		shops.add(new Shop("Saidapet", "Madhura"));
-		shops.add(new Shop("Choolaimedu", "Cauvery"));
-		shops.add(new Shop("Choolaimedu", "Yamunai"));
+		shops.add(new Shop("Madhura", "Madhura"));
+		shops.add(new Shop("Cauvery", "Cauvery"));
+		shops.add(new Shop("Yamunai", "Yamunai"));
 		shopRepository.saveAll(shops);
 
 		List<OrderStatus> orderStatuses = new ArrayList<OrderStatus>(4);

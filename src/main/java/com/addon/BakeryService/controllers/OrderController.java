@@ -50,7 +50,10 @@ public class OrderController {
 		salesOrder.setOrderedTime(LocalTime.now());
 		return orderRepository.save(salesOrder);
 	}
-
+	@PostMapping("/edit")
+	public @ResponseBody SalesOrder edit(@RequestBody SalesOrder salesOrder) {
+		return orderRepository.save(salesOrder);
+	}
 	@GetMapping("/getStatuses")
 	public Iterable<OrderStatus> getOrderStatuses() {
 		return orderStatusRepository.findAll();
