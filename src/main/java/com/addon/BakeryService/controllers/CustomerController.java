@@ -31,8 +31,10 @@ public class CustomerController {
 	public @ResponseBody Iterable<Customer> getAll() {
 		return customerRepository.findAll();
 	}
+
 	
 	@PostMapping("/add")
+
 	public Customer add(@RequestBody Customer customer) {
 		return customerRepository.save(customer);
 	}

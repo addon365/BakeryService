@@ -62,12 +62,16 @@ public class OrderItem {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getQuatity() {
+
+	public int getQuantity() {
 		return quantity;
 	}
-	public void setQuatity(int quatity) {
-		this.quantity = quatity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
+
+	
+	
 
 	
 	
