@@ -33,7 +33,13 @@ public class OrderController {
 
 	@GetMapping("/get")
 	public Iterable<SalesOrder> getAll() {
-		return orderRepository.findAll();
+		return orderRepository.getNotDelivered("Delivered");
+	}
+
+	@GetMapping("/getSalesReport")
+	public Iterable<SalesOrder> getSalesReport() {
+		OrderStatus orderStatus = orderStatusRepository.findByName("Delivered");
+		return orderRepository.findByOrderStatus(orderStatus);
 	}
 
 	@PostMapping("/add")
@@ -50,10 +56,12 @@ public class OrderController {
 		salesOrder.setOrderedTime(LocalTime.now());
 		return orderRepository.save(salesOrder);
 	}
+
 	@PostMapping("/edit")
 	public @ResponseBody SalesOrder edit(@RequestBody SalesOrder salesOrder) {
 		return orderRepository.save(salesOrder);
 	}
+
 	@GetMapping("/getStatuses")
 	public Iterable<OrderStatus> getOrderStatuses() {
 		return orderStatusRepository.findAll();

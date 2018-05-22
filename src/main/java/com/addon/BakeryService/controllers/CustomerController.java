@@ -32,7 +32,9 @@ public class CustomerController {
 		return customerRepository.findAll();
 	}
 
-	@PostMapping("add")
+	
+	@PostMapping("/add")
+
 	public Customer add(@RequestBody Customer customer) {
 		return customerRepository.save(customer);
 	}
