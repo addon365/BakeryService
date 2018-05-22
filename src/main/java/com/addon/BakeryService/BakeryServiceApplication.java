@@ -12,7 +12,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import com.addon.BakeryService.models.Customer;
 import com.addon.BakeryService.models.OrderItem;
@@ -29,7 +31,7 @@ import com.addon.BakeryService.models.repos.ShopRepository;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EntityScan(basePackages = { "com.addon.BakeryService.models" })
-public class BakeryServiceApplication implements CommandLineRunner {
+public class BakeryServiceApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
 	@Autowired
 	ShopRepository shopRepository;
@@ -41,6 +43,11 @@ public class BakeryServiceApplication implements CommandLineRunner {
 	CustomerRepository customerRepository;
 	@Autowired
 	OrderRepository orderRepository;
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(BakeryServiceApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BakeryServiceApplication.class, args);
