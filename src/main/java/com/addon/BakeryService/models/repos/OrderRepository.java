@@ -10,6 +10,6 @@ import com.addon.BakeryService.models.SalesOrder;
 public interface OrderRepository extends PagingAndSortingRepository<SalesOrder, Long> {
 	public Iterable<SalesOrder> findByOrderStatus(OrderStatus orderStatus);
 
-	@Query("SELECT s FROM SalesOrder s WHERE LOWER(s.orderStatus.name) != LOWER(:statusName)")
-	public Iterable<SalesOrder> getNotDelivered(@Param("statusName") String statusName);
+	@Query("SELECT s FROM SalesOrder s WHERE LOWER(s.orderStatus.name) != 'delivered'")
+	public Iterable<SalesOrder> getNotDelivered();
 }

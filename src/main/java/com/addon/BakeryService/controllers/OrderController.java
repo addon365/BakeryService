@@ -33,8 +33,14 @@ public class OrderController {
 
 	@GetMapping("/get")
 	public Iterable<SalesOrder> getAll() {
-		return orderRepository.getNotDelivered("Delivered");
+		return orderRepository.findAll();
 	}
+	
+	@GetMapping("/getOrders")
+	public Iterable<SalesOrder> getOrders() {
+		return orderRepository.getNotDelivered();
+	}
+
 
 	@GetMapping("/getSalesReport")
 	public Iterable<SalesOrder> getSalesReport() {
