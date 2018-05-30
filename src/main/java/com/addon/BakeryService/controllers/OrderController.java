@@ -60,7 +60,8 @@ public class OrderController {
 		}
 		salesOrder.setOrderedDate(LocalDate.now());
 		salesOrder.setOrderedTime(LocalTime.now());
-		return orderRepository.save(salesOrder);
+		 orderRepository.save(salesOrder);
+		return salesOrder;
 	}
 
 	@PostMapping("/edit")

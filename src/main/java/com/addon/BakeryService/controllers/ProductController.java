@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.addon.BakeryService.models.Product;
+import com.addon.BakeryService.models.SalesOrder;
 import com.addon.BakeryService.models.repos.ProductRepository;
 
 @RestController
@@ -21,21 +22,21 @@ public class ProductController {
 	@Autowired
 	ProductRepository productRepository;
 
-	@GetMapping("get")
+	@GetMapping("/get")
 	public @ResponseBody Iterable<Product> getAll() {
 		return productRepository.findAll();
 	}
 
-	@PostMapping("add")
+	@PostMapping("/add")
 	public Product add(@RequestBody Product product) {
 
 		productRepository.save(product);
 		return product;
 
 	}
-	@PutMapping("edit")
-	public Product edit(Product product) {
+	
+	@PostMapping("/edit")
+	public @ResponseBody Product edit(@RequestBody Product product) {
 		return productRepository.save(product);
 	}
-
 }

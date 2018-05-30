@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.addon.BakeryService.models.Customer;
+import com.addon.BakeryService.models.Product;
 import com.addon.BakeryService.models.repos.CustomerRepository;
 import com.addon.BakeryService.models.repos.OrderRepository;
 
@@ -36,6 +37,12 @@ public class CustomerController {
 	@PostMapping("/add")
 
 	public Customer add(@RequestBody Customer customer) {
+		 customerRepository.save(customer);
+		return customer;
+	}
+	
+	@PostMapping("/edit")
+	public @ResponseBody Customer edit(@RequestBody Customer customer) {
 		return customerRepository.save(customer);
 	}
 }
