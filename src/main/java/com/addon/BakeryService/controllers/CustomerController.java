@@ -35,7 +35,6 @@ public class CustomerController {
 
 	
 	@PostMapping("/add")
-
 	public Customer add(@RequestBody Customer customer) {
 		 customerRepository.save(customer);
 		return customer;
@@ -43,6 +42,7 @@ public class CustomerController {
 	
 	@PostMapping("/edit")
 	public @ResponseBody Customer edit(@RequestBody Customer customer) {
-		return customerRepository.save(customer);
+		 customerRepository.save(customer);
+		return customer;
 	}
 }

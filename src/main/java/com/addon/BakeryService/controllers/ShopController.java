@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.addon.BakeryService.models.Shop;
 import com.addon.BakeryService.models.repos.ShopRepository;
@@ -16,7 +17,7 @@ public class ShopController {
 	ShopRepository shopRepository;
 
 	@GetMapping("/get")
-	public Iterable<Shop> getAll() {
+	public @ResponseBody Iterable<Shop> getAll() {
 		return shopRepository.findAll();
 	}
 

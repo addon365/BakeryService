@@ -32,24 +32,24 @@ public class OrderController {
 	CustomerRepository customerRepository;
 
 	@GetMapping("/get")
-	public Iterable<SalesOrder> getAll() {
+	public @ResponseBody Iterable<SalesOrder> getAll() {
 		return orderRepository.findAll();
 	}
 	
 	@GetMapping("/getOrders")
-	public Iterable<SalesOrder> getOrders() {
+	public @ResponseBody Iterable<SalesOrder> getOrders() {
 		return orderRepository.getNotDelivered();
 	}
 
 
 	@GetMapping("/getSalesReport")
-	public Iterable<SalesOrder> getSalesReport() {
+	public @ResponseBody Iterable<SalesOrder> getSalesReport() {
 		OrderStatus orderStatus = orderStatusRepository.findByName("Delivered");
 		return orderRepository.findByOrderStatus(orderStatus);
 	}
 
 	@PostMapping("/add")
-	public @ResponseBody SalesOrder add(@RequestBody SalesOrder salesOrder) {
+	public SalesOrder add(@RequestBody SalesOrder salesOrder) {
 
 		Customer customer = salesOrder.getCustomer();
 		if (customer == null) {
@@ -67,10 +67,11 @@ public class OrderController {
 	@PostMapping("/edit")
 	public @ResponseBody SalesOrder edit(@RequestBody SalesOrder salesOrder) {
 		return orderRepository.save(salesOrder);
+		 
 	}
 
 	@GetMapping("/getStatuses")
-	public Iterable<OrderStatus> getOrderStatuses() {
+	public  @ResponseBody Iterable<OrderStatus> getOrderStatuses() {
 		return orderStatusRepository.findAll();
 	}
 }

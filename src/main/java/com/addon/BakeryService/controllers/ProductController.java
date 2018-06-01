@@ -30,13 +30,14 @@ public class ProductController {
 	@PostMapping("/add")
 	public Product add(@RequestBody Product product) {
 
-		productRepository.save(product);
+		 productRepository.save(product);
+		 
 		return product;
-
 	}
 	
 	@PostMapping("/edit")
 	public @ResponseBody Product edit(@RequestBody Product product) {
-		return productRepository.save(product);
+		 productRepository.save(product);
+		 return product;
 	}
 }

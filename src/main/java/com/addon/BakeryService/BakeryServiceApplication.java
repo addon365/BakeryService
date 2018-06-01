@@ -51,14 +51,13 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 
 	public static void main(String[] args) {
 		SpringApplication.run(BakeryServiceApplication.class, args);
+		System.out.println("connected");
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		// Customer customer = new Customer("Dummy", "9999999999", "2222222222");
-		// customerRepository.save(customer);
-
+		
 		if (shopRepository.count() == 0) {
 
 			List<Shop> shops = new ArrayList<Shop>(3);
