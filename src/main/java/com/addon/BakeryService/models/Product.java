@@ -12,12 +12,24 @@ public class Product {
 	private String name;
 	private int quantity;
 	private double price;
+	private String modelNumber;
 	
 	public Product()
 	{
 		
 	}
 	
+	
+	public String getModelNumber() {
+		return modelNumber;
+	}
+
+
+	public void setModelNumber(String modelNumber) {
+		this.modelNumber = modelNumber;
+	}
+
+
 	public int getQuantity() {
 		return quantity;
 	}

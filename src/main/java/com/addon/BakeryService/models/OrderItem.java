@@ -20,12 +20,27 @@ public class OrderItem {
 	
 	private double price;
 	private int quantity;
+	private int uom;
 	private SalesOrder order;
 	
 	public OrderItem() {
 		
 	}
 	
+	
+	
+	public int getUom() {
+		return uom;
+	}
+
+
+
+	public void setUom(int uom) {
+		this.uom = uom;
+	}
+
+
+
 	public OrderItem(Product product,double price,int quantity) {
 		this.product=product;
 		this.price=price;

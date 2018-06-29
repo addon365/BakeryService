@@ -58,14 +58,7 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 	public void run(String... args) throws Exception {
 
 		
-		if (shopRepository.count() == 0) {
-
-			List<Shop> shops = new ArrayList<Shop>(3);
-			shops.add(new Shop("Madhura", "Madhura"));
-			shops.add(new Shop("Cauvery", "Cauvery"));
-			shops.add(new Shop("Yamunai", "Yamunai"));
-			shopRepository.saveAll(shops);
-		}
+	
 		if (orderStatusRepository.count() == 0) {
 			List<OrderStatus> orderStatuses = new ArrayList<OrderStatus>(4);
 			orderStatuses.add(new OrderStatus("Delivered", "D"));
