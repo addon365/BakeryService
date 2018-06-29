@@ -27,7 +27,7 @@ public class OrderItem {
 		
 	}
 	
-	l̥
+	
 	
 	public int getUom() {
 		return uom;
