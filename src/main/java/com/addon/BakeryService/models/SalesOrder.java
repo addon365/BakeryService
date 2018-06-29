@@ -16,8 +16,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class SalesOrder {
-	
-	
+
 	private Long id;
 	private Customer customer;
 	private double advance;
@@ -28,14 +27,31 @@ public class SalesOrder {
 	private LocalTime expectedTime;
 	private OrderStatus orderStatus;
 	private Shop shop;
+	private String message;
+	private String comments;
 	private Set<OrderItem> orderItems;
-	
-	public SalesOrder() {
-		
-	}
-	
 
-	@OneToMany(cascade=CascadeType.ALL)
+	public SalesOrder() {
+
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
 	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -53,7 +69,7 @@ public class SalesOrder {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@OneToOne
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
@@ -62,7 +78,7 @@ public class SalesOrder {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	
+
 	@OneToOne
 	public Shop getShop() {
 		return shop;
@@ -71,8 +87,7 @@ public class SalesOrder {
 	public void setShop(Shop shop) {
 		this.shop = shop;
 	}
-	
-	
+
 	@OneToOne
 	public Customer getCustomer() {
 		return customer;
@@ -129,10 +144,5 @@ public class SalesOrder {
 	public void setExpectedTime(LocalTime expectedTime) {
 		this.expectedTime = expectedTime;
 	}
-
-	
-	
-	
-	
 
 }
