@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.addon.BakeryService.models.Flavour;
-
+import com.addon.BakeryService.models.Shop;
 import com.addon.BakeryService.models.repos.FlavourRepository;
 
 @RestController
@@ -31,5 +31,9 @@ public class FlavourController {
 	public @ResponseBody Flavour add(@RequestBody Flavour flavour) {
 		return flavourRepository.save(flavour);
 	}
-	
+	@PostMapping("/edit")
+	public @ResponseBody Flavour edit(@RequestBody Flavour flavour) {
+		flavourRepository.save(flavour);
+		return flavour;
+	}
 }

@@ -69,8 +69,8 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 		}
 		if (productRepository.count() == 0) {
 			List<Product> products = new ArrayList<Product>(2);
-			products.add(new Product("CupCake", 10.00));
-			products.add(new Product("Bread", 25.00));
+			products.add(new Product("CupCake", 10.00,"Cmodel-1"));
+			products.add(new Product("Bread", 25.00,"Bmodel-1"));
 			productRepository.saveAll(products);
 
 		}

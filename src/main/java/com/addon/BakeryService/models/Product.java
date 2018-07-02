@@ -38,16 +38,18 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public Product(String name,double price) {
+	public Product(String name,double price, String modelNumber ) {
 		this.name=name;
 		this.price=price;
+		this.modelNumber=modelNumber;
 		
 	}
-	public Product(long id, String name, double price) {
+	public Product(long id, String name, double price,String modelNumber) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.modelNumber=modelNumber;
 		
 	}
 	@Id
