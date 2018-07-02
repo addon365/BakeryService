@@ -22,12 +22,14 @@ import com.addon.BakeryService.models.OrderStatus;
 import com.addon.BakeryService.models.Product;
 import com.addon.BakeryService.models.SalesOrder;
 import com.addon.BakeryService.models.Shop;
+import com.addon.BakeryService.models.UOM;
 import com.addon.BakeryService.models.repos.CustomerRepository;
 import com.addon.BakeryService.models.repos.FlavourRepository;
 import com.addon.BakeryService.models.repos.OrderRepository;
 import com.addon.BakeryService.models.repos.OrderStatusRepository;
 import com.addon.BakeryService.models.repos.ProductRepository;
 import com.addon.BakeryService.models.repos.ShopRepository;
+import com.addon.BakeryService.models.repos.UOMRepository;
 
 @SpringBootApplication
 @EnableConfigurationProperties
@@ -46,6 +48,8 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 	OrderRepository orderRepository;
 	@Autowired
 	FlavourRepository flavourRepository;
+	@Autowired
+	UOMRepository uomRepository;
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -60,7 +64,12 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 	@Override
 	public void run(String... args) throws Exception {
 
-		
+		if(uomRepository.count()==0) {
+			List<UOM> uoms=new ArrayList<UOM>();
+			uoms.add(new UOM("Kg"));
+			uoms.add(new UOM("Pieces"));
+			uomRepository.saveAll(uoms);
+		}
 	
 		if (orderStatusRepository.count() == 0) {
 			List<OrderStatus> orderStatuses = new ArrayList<OrderStatus>(4);
