@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.addon.BakeryService.models.Customer;
 import com.addon.BakeryService.models.Shop;
 import com.addon.BakeryService.models.repos.ShopRepository;
 
@@ -27,7 +29,11 @@ public class ShopController {
 	public @ResponseBody Shop add(@RequestBody Shop shop) {
 		return shopRepository.save(shop);
 	}
-	
+	@PostMapping("/edit")
+	public @ResponseBody Shop edit(@RequestBody Shop shop) {
+		shopRepository.save(shop);
+		return shop;
+	}
 
 
 }
