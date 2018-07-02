@@ -20,25 +20,41 @@ public class OrderItem {
 	
 	private double price;
 	private int quantity;
-	private int uom;
+	private UOM uom;
 	private SalesOrder order;
+	private Flavour flavour;
 	
+	public Flavour getFlavour() {
+		return flavour;
+	}
+
+
+
+	public void setFlavour(Flavour flavour) {
+		this.flavour = flavour;
+	}
+
+
+
+	public void setUom(UOM uom) {
+		this.uom = uom;
+	}
+
+
+
 	public OrderItem() {
 		
 	}
 	
 	
 	
-	public int getUom() {
+	public UOM getUom() {
 		return uom;
 	}
 
 
 
-	public void setUom(int uom) {
-		this.uom = uom;
-	}
-
+	
 
 
 	public OrderItem(Product product,double price,int quantity) {
