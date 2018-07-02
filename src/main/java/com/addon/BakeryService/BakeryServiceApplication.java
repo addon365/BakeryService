@@ -23,6 +23,7 @@ import com.addon.BakeryService.models.Product;
 import com.addon.BakeryService.models.SalesOrder;
 import com.addon.BakeryService.models.Shop;
 import com.addon.BakeryService.models.repos.CustomerRepository;
+import com.addon.BakeryService.models.repos.FlavourRepository;
 import com.addon.BakeryService.models.repos.OrderRepository;
 import com.addon.BakeryService.models.repos.OrderStatusRepository;
 import com.addon.BakeryService.models.repos.ProductRepository;
@@ -43,6 +44,8 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 	CustomerRepository customerRepository;
 	@Autowired
 	OrderRepository orderRepository;
+	@Autowired
+	FlavourRepository flavourRepository;
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
