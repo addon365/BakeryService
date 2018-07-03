@@ -2,6 +2,7 @@ package com.addon.BakeryService.controllers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,8 @@ import com.addon.BakeryService.models.repos.CustomerRepository;
 import com.addon.BakeryService.models.repos.OrderRepository;
 import com.addon.BakeryService.models.repos.OrderStatusRepository;
 
+import antlr.collections.List;
+
 @RestController
 @RequestMapping("/api/order")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -36,21 +39,20 @@ public class OrderController {
 	public @ResponseBody Iterable<SalesOrder> getAll() {
 		return orderRepository.findAll();
 	}
-	
+
 	@GetMapping("/getOrders")
 	public @ResponseBody Iterable<SalesOrder> getOrders() {
 		return orderRepository.getNotDelivered();
 	}
-
 
 	@GetMapping("/getSalesReport")
 	public @ResponseBody Iterable<SalesOrder> getSalesReport() {
 		OrderStatus orderStatus = orderStatusRepository.findByName("Delivered");
 		return orderRepository.findByOrderStatus(orderStatus);
 	}
-	
+
 	@GetMapping("/getReportParam/{status}")
-	public @ResponseBody Iterable<SalesOrder> getSalesReport(@PathVariable("status") String status){
+	public @ResponseBody Iterable<SalesOrder> getSalesReport(@PathVariable("status") String status) {
 		OrderStatus orderStatus = orderStatusRepository.findByName(status);
 		return orderRepository.findByOrderStatus(orderStatus);
 	}
@@ -65,21 +67,31 @@ public class OrderController {
 			customer = customerRepository.save(customer);
 			salesOrder.setCustomer(customer);
 		}
-		
+
 		salesOrder.setOrderedDate(LocalDate.now());
 		salesOrder.setOrderedTime(LocalTime.now());
 		return orderRepository.save(salesOrder);
-		 
+
+	}
+
+	@PostMapping("/moveToProduction")
+	public String moveToProduction(@RequestBody ArrayList<SalesOrder> salesOrderList) {
+		OrderStatus orderStatus = orderStatusRepository.findByName("InProduction");
+		for (int i = 0; i < salesOrderList.size(); i++) {
+			salesOrderList.get(i).setOrderStatus(orderStatus);
+		}
+		orderRepository.saveAll(salesOrderList);
+		return "SUCCESS";
 	}
 
 	@PostMapping("/edit")
 	public @ResponseBody SalesOrder edit(@RequestBody SalesOrder salesOrder) {
 		return orderRepository.save(salesOrder);
-		 
+
 	}
 
 	@GetMapping("/getStatuses")
-	public  @ResponseBody Iterable<OrderStatus> getOrderStatuses() {
+	public @ResponseBody Iterable<OrderStatus> getOrderStatuses() {
 		return orderStatusRepository.findAll();
 	}
 }
