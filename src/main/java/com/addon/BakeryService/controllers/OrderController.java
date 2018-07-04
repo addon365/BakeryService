@@ -75,13 +75,23 @@ public class OrderController {
 	}
 
 	@PostMapping("/moveToProduction")
-	public String moveToProduction(@RequestBody ArrayList<SalesOrder> salesOrderList) {
+	public @ResponseBody Iterable<SalesOrder> moveToProduction(@RequestBody ArrayList<SalesOrder> salesOrderList) {
 		OrderStatus orderStatus = orderStatusRepository.findByName("InProduction");
 		for (int i = 0; i < salesOrderList.size(); i++) {
 			salesOrderList.get(i).setOrderStatus(orderStatus);
 		}
-		orderRepository.saveAll(salesOrderList);
-		return "SUCCESS";
+		return orderRepository.saveAll(salesOrderList);
+
+	}
+
+	@PostMapping("/moveToStock")
+	public @ResponseBody Iterable<SalesOrder> moveToStock(@RequestBody ArrayList<SalesOrder> salesOrderList) {
+		OrderStatus orderStatus = orderStatusRepository.findByName("InStock");
+		for (int i = 0; i < salesOrderList.size(); i++) {
+			salesOrderList.get(i).setOrderStatus(orderStatus);
+		}
+		return orderRepository.saveAll(salesOrderList);
+
 	}
 
 	@PostMapping("/edit")
