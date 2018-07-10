@@ -51,6 +51,8 @@ public class Customer {
 	public void setAlternateMobile(String alternateMobile) {
 		this.alternateMobile = alternateMobile;
 	}
+
+	
 	
 	
 }

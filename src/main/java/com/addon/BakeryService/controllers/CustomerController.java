@@ -24,7 +24,7 @@ public class CustomerController {
 
 	@GetMapping("/find")
 	public @ResponseBody Customer findCustomerByMobile(
-			@RequestParam(value = "mobile", defaultValue = "99999999") String mobile) {
+			@RequestParam(value = "mobile", defaultValue = "0000000000") String mobile) {
 		return customerRepository.findByMobile(mobile);
 	}
 
@@ -36,8 +36,11 @@ public class CustomerController {
 	
 	@PostMapping("/add")
 	public Customer add(@RequestBody Customer customer) {
-		 customerRepository.save(customer);
-		return customer;
+		Customer tmpCustomer=customerRepository.findByMobile(customer.getMobile());
+		if(tmpCustomer==null)
+			return  customerRepository.save(customer);
+		else
+			return tmpCustomer;
 	}
 	
 	@PostMapping("/edit")
