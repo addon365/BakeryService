@@ -86,11 +86,6 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 			productRepository.saveAll(products);
 
 		}
-		if(customerRepository.count() == 0) {
-			Customer c = new Customer("default","0000000000","0000000000");
-		customerRepository.save(c);
-		}
-		
 		// Set<OrderItem> orderItems = new HashSet<OrderItem>(2);
 		// orderItems.add(new OrderItem(products.get(0), 10, 2));
 		// orderItems.add(new OrderItem(products.get(1), 25, 2));

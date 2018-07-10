@@ -62,7 +62,7 @@ public class OrderController {
 
 		Customer customer = salesOrder.getCustomer();
 		if (customer == null) {
-			customer=customerRepository.findByMobile("0000000000");
+			salesOrder.setCustomer(new Customer(1L));
 		} else if (customer.getId() == -1) {
 			customer = customerRepository.save(customer);
 			salesOrder.setCustomer(customer);
@@ -73,20 +73,6 @@ public class OrderController {
 		return orderRepository.save(salesOrder);
 
 	}
-	@PostMapping("/checkout")
-	public SalesOrder checkout(@RequestBody SalesOrder salesOrder) {
-		Customer customer = salesOrder.getCustomer();
-		
-		if (customer == null) {
-			customer=customerRepository.findByMobile("0000000000");
-			salesOrder.setCustomer(customer);
-		} 
-		salesOrder.setOrderedDate(LocalDate.now());
-		salesOrder.setOrderedTime(LocalTime.now());
-		return orderRepository.save(salesOrder);
-
-	}
-
 
 	@PostMapping("/moveToProduction")
 	public @ResponseBody Iterable<SalesOrder> moveToProduction(@RequestBody ArrayList<SalesOrder> salesOrderList) {
