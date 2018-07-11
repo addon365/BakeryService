@@ -79,13 +79,13 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 			orderStatuses.add(new OrderStatus("Pending", "P"));
 			orderStatusRepository.saveAll(orderStatuses);
 		}
-		if (productRepository.count() == 0) {
-			List<Product> products = new ArrayList<Product>(2);
-			products.add(new Product("CupCake", 10.00,"Cmodel-1"));
-			products.add(new Product("Bread", 25.00,"Bmodel-1"));
-			productRepository.saveAll(products);
-
-		}
+//		if (productRepository.count() == 0) {
+//			List<Product> products = new ArrayList<Product>(2);
+//			products.add(new Product("CupCake", 10.00,"Cmodel-1"));
+//			products.add(new Product("Bread", 25.00,"Bmodel-1"));
+//			productRepository.saveAll(products);
+//
+//		}
 		if(customerRepository.count() == 0) {
 			Customer c = new Customer("default","0000000000","0000000000");
 		customerRepository.save(c);
