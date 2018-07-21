@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 public class SalesOrder {
 
 	private Long id;
+	private Long Customid;
 	private Customer customer;
 	private double advance;
 	private double total;
@@ -37,6 +38,14 @@ public class SalesOrder {
 
 	public String getMessage() {
 		return message;
+	}
+
+	public Long getCustomid() {
+		return Customid;
+	}
+
+	public void setCustomid(Long customid) {
+		Customid = customid;
 	}
 
 	public void setMessage(String message) {

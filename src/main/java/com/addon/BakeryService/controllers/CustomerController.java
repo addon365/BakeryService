@@ -24,7 +24,7 @@ public class CustomerController {
 
 	@GetMapping("/find")
 	public @ResponseBody Customer findCustomerByMobile(
-			@RequestParam(value = "mobile", defaultValue = "0000000000") String mobile) {
+			@RequestParam(value = "mobile", defaultValue = "00000000") String mobile) {
 		return customerRepository.findByMobile(mobile);
 	}
 

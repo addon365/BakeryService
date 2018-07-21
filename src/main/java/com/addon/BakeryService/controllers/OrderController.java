@@ -69,6 +69,10 @@ public class OrderController {
 		}
 
 		salesOrder.setOrderedDate(LocalDate.now());
+		 Long customid=Long.valueOf(0);
+		if(orderRepository.getMaxId()!=null) 
+			customid=orderRepository.getMaxId().getCustomid();
+		salesOrder.setCustomid(customid+1);
 		salesOrder.setOrderedTime(LocalTime.now());
 		return orderRepository.save(salesOrder);
 
@@ -82,6 +86,10 @@ public class OrderController {
 			salesOrder.setCustomer(customer);
 		} 
 		salesOrder.setOrderedDate(LocalDate.now());
+		 Long customid=Long.valueOf(0);
+			if(orderRepository.getMaxId()!=null) 
+				customid=orderRepository.getMaxId().getCustomid();
+			salesOrder.setCustomid(customid+1);
 		salesOrder.setOrderedTime(LocalTime.now());
 		return orderRepository.save(salesOrder);
 

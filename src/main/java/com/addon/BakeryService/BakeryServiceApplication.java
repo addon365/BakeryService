@@ -17,6 +17,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import com.addon.BakeryService.models.Customer;
+import com.addon.BakeryService.models.Flavour;
 import com.addon.BakeryService.models.OrderItem;
 import com.addon.BakeryService.models.OrderStatus;
 import com.addon.BakeryService.models.Product;
@@ -89,6 +90,10 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 		if(customerRepository.count() == 0) {
 			Customer c = new Customer("default","0000000000","0000000000");
 		customerRepository.save(c);
+		}
+		if(flavourRepository.count() == 0) {
+			Flavour f = new Flavour("Plain","Plain");
+			flavourRepository.save(f);
 		}
 		
 		// Set<OrderItem> orderItems = new HashSet<OrderItem>(2);

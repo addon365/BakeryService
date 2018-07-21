@@ -15,4 +15,10 @@ public interface OrderRepository extends PagingAndSortingRepository<SalesOrder, 
 
 	@Query("SELECT s FROM SalesOrder s WHERE LOWER(s.orderStatus.name) != 'delivered'")
 	public Iterable<SalesOrder> getNotDelivered();
+	
+	public SalesOrder findAllByOrderByCustomidAsc();
+	
+
+	@Query(value="SELECT * FROM sales_order ORDER BY customid DESC LIMIT 1", nativeQuery = true)
+	public SalesOrder getMaxId();
 }

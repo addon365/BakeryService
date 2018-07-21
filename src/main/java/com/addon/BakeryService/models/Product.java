@@ -10,7 +10,7 @@ public class Product {
 	
 	private long id;
 	private String name;
-	private int quantity;
+	private double quantity;
 	private double price;
 	private String modelNumber;
 	
@@ -30,19 +30,19 @@ public class Product {
 	}
 
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 
-	public Product(String name,double price, String modelNumber ) {
+	public Product(String name,double price, double quantity, String modelNumber ) {
 		this.name=name;
 		this.price=price;
 		this.modelNumber=modelNumber;
-		
+		this.quantity=quantity;
 	}
 	public Product(long id, String name, double price,String modelNumber) {
 		super();

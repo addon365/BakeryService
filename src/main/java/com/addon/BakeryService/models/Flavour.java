@@ -11,7 +11,15 @@ public class Flavour {
 	private Long id;
 	private String name;
 	private String code;
-
+	public Flavour() {}
+	public Flavour(Long id) {
+		this.id=id;
+	}
+	public Flavour(String name,String code) {
+		this.name=name;
+		this.code=code;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
