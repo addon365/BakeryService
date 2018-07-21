@@ -1,6 +1,8 @@
 package com.addon.BakeryService.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.addon.BakeryService.errors.CustomError;
 import com.addon.BakeryService.models.Product;
 import com.addon.BakeryService.models.SalesOrder;
 import com.addon.BakeryService.models.repos.ProductRepository;
@@ -28,16 +31,17 @@ public class ProductController {
 	}
 
 	@PostMapping("/add")
-	public Product add(@RequestBody Product product) {
+	public ResponseEntity<?> add(@RequestBody Product product) {
+		if (productRepository.findByModelNumber(product.getModelNumber()) != null) {
+			return new ResponseEntity<CustomError>(new CustomError("Model number Already Found"), HttpStatus.CONFLICT);
+		}
 
-		 productRepository.save(product);
-		 
-		return product;
+		return new ResponseEntity<Product>(productRepository.save(product), HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping("/edit")
 	public @ResponseBody Product edit(@RequestBody Product product) {
-		 productRepository.save(product);
-		 return product;
+		productRepository.save(product);
+		return product;
 	}
 }
