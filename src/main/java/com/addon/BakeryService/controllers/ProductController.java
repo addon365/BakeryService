@@ -33,7 +33,9 @@ public class ProductController {
 	@PostMapping("/add")
 	public ResponseEntity<?> add(@RequestBody Product product) {
 		if (productRepository.findByModelNumber(product.getModelNumber()) != null) {
+			
 			return new ResponseEntity<CustomError>(new CustomError("Model number Already Found"), HttpStatus.CONFLICT);
+	
 		}
 
 		return new ResponseEntity<Product>(productRepository.save(product), HttpStatus.CREATED);

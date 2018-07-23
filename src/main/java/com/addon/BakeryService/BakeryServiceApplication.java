@@ -73,11 +73,12 @@ public class BakeryServiceApplication extends SpringBootServletInitializer imple
 		}
 	
 		if (orderStatusRepository.count() == 0) {
-			List<OrderStatus> orderStatuses = new ArrayList<OrderStatus>(4);
+			List<OrderStatus> orderStatuses = new ArrayList<OrderStatus>(5);
 			orderStatuses.add(new OrderStatus("Delivered", "D"));
 			orderStatuses.add(new OrderStatus("InProduction", "IP"));
 			orderStatuses.add(new OrderStatus("InStock", "IS"));
 			orderStatuses.add(new OrderStatus("Pending", "P"));
+			orderStatuses.add(new OrderStatus("Cancelled", "C"));
 			orderStatusRepository.saveAll(orderStatuses);
 		}
 //		if (productRepository.count() == 0) {
