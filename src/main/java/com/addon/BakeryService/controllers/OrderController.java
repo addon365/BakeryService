@@ -1,25 +1,32 @@
 package com.addon.BakeryService.controllers;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.addon.BakeryService.models.Customer;
 import com.addon.BakeryService.models.OrderStatus;
 import com.addon.BakeryService.models.SalesOrder;
+import com.addon.BakeryService.models.Shop;
 import com.addon.BakeryService.models.repos.CustomerRepository;
 import com.addon.BakeryService.models.repos.OrderRepository;
 import com.addon.BakeryService.models.repos.OrderStatusRepository;
+import com.addon.BakeryService.models.repos.ShopRepository;
 
 import antlr.collections.List;
 
@@ -34,7 +41,9 @@ public class OrderController {
 	OrderStatusRepository orderStatusRepository;
 	@Autowired
 	CustomerRepository customerRepository;
-
+	@Autowired
+	ShopRepository shopRepository;
+	
 	@GetMapping("/get")
 	public @ResponseBody Iterable<SalesOrder> getAll() {
 		return orderRepository.findAll();
@@ -60,35 +69,45 @@ public class OrderController {
 	@PostMapping("/add")
 	public SalesOrder add(@RequestBody SalesOrder salesOrder) {
 
+		Shop shop = salesOrder.getShop();
 		Customer customer = salesOrder.getCustomer();
-		if (customer == null) {
-			customer=customerRepository.findByMobile("0000000000");
-		} else if (customer.getId() == -1) {
-			customer = customerRepository.save(customer);
-			salesOrder.setCustomer(customer);
+			
+			if (customer == null) {
+				customer=customerRepository.findByMobile("0000000000");
+			} else if (customer.getId() == -1) {
+				customer = customerRepository.save(customer);
+				salesOrder.setCustomer(customer);
+			}
+			Long shopId=shop.getId();
+			LocalDate date = salesOrder.getExpectedDate();
+			LocalDate date1Day = date.plus(1, ChronoUnit.DAYS);
+			salesOrder.setExpectedDate(date1Day);
+			salesOrder.setOrderedDate(LocalDate.now());
+			 Long customid=Long.valueOf(0);
+			if(orderRepository.getMaxShopId(shopId)!=null) 
+				customid=orderRepository.getMaxShopId(shopId).getCustomid();
+			salesOrder.setCustomid(customid+1);
+			salesOrder.setOrderedTime(LocalTime.now());
+			return orderRepository.save(salesOrder);
+		
 		}
+		
 
-		salesOrder.setOrderedDate(LocalDate.now());
-		 Long customid=Long.valueOf(0);
-		if(orderRepository.getMaxId()!=null) 
-			customid=orderRepository.getMaxId().getCustomid();
-		salesOrder.setCustomid(customid+1);
-		salesOrder.setOrderedTime(LocalTime.now());
-		return orderRepository.save(salesOrder);
 
-	}
 	@PostMapping("/checkout")
 	public SalesOrder checkout(@RequestBody SalesOrder salesOrder) {
+		Shop shop = salesOrder.getShop();
 		Customer customer = salesOrder.getCustomer();
 		
 		if (customer == null) {
 			customer=customerRepository.findByMobile("0000000000");
 			salesOrder.setCustomer(customer);
 		} 
+		Long shopId=shop.getId();
 		salesOrder.setOrderedDate(LocalDate.now());
 		 Long customid=Long.valueOf(0);
-			if(orderRepository.getMaxId()!=null) 
-				customid=orderRepository.getMaxId().getCustomid();
+			if(orderRepository.getMaxShopId(shopId)!=null) 
+				customid=orderRepository.getMaxShopId(shopId).getCustomid();
 			salesOrder.setCustomid(customid+1);
 		salesOrder.setOrderedTime(LocalTime.now());
 		return orderRepository.save(salesOrder);
@@ -118,6 +137,9 @@ public class OrderController {
 
 	@PostMapping("/edit")
 	public @ResponseBody SalesOrder edit(@RequestBody SalesOrder salesOrder) {
+		LocalDate date = salesOrder.getExpectedDate();
+		LocalDate date1Day = date.plus(1, ChronoUnit.DAYS);
+		salesOrder.setExpectedDate(date1Day);
 		return orderRepository.save(salesOrder);
 
 	}
@@ -126,4 +148,9 @@ public class OrderController {
 	public @ResponseBody Iterable<OrderStatus> getOrderStatuses() {
 		return orderStatusRepository.findAll();
 	}
+	@DeleteMapping("/delete/{id}")
+	public @ResponseBody void deleteSalesorder(@RequestBody @PathVariable("id") Long Id) {
+		orderRepository.deleteById(Id);
+	}
+	
 }

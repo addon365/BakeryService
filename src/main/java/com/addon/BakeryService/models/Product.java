@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Product {
 	
-	private long id;
+	private Long id;
 	private String name;
 	private double quantity;
 	private double price;
@@ -44,7 +44,7 @@ public class Product {
 		this.modelNumber=modelNumber;
 		this.quantity=quantity;
 	}
-	public Product(long id, String name, double price,String modelNumber) {
+	public Product(Long id, String name, double price,String modelNumber) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -52,13 +52,14 @@ public class Product {
 		this.modelNumber=modelNumber;
 		
 	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

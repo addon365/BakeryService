@@ -22,7 +22,7 @@ public class OrderItem {
 	private Product product;
 
 	private double price;
-	private int quantity;
+	private double quantity;
 	private UOM uom;
 	private SalesOrder order;
 
@@ -92,11 +92,11 @@ public class OrderItem {
 		this.price = price;
 	}
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 
