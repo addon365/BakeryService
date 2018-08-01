@@ -137,10 +137,26 @@ public class OrderController {
 
 	@PostMapping("/edit")
 	public @ResponseBody SalesOrder edit(@RequestBody SalesOrder salesOrder) {
-		LocalDate date = salesOrder.getExpectedDate();
-		LocalDate date1Day = date.plus(1, ChronoUnit.DAYS);
-		salesOrder.setExpectedDate(date1Day);
+		
+//		Optional<SalesOrder> salesOrder1=orderRepository.findById(salesOrder.getId());
+//		LocalDate serverdate=salesOrder1.get().getExpectedDate();
+//		System.out.println("server"+serverdate);
+//		LocalDate today=salesOrder.getExpectedDate();
+//		System.out.println("cilent"+salesOrder.getExpectedDate());
+//		
+//		if(serverdate.equals(today)) {
+//			System.out.println("hi");
+//			
+//			salesOrder.setExpectedDate(serverdate);
+//		}else {
+//			System.out.println("bye");
+//			LocalDate date = today;
+//			LocalDate date1Day = date.plus(1, ChronoUnit.DAYS);
+//			salesOrder.setExpectedDate(date1Day);
+//		}
 		return orderRepository.save(salesOrder);
+		
+		
 
 	}
 

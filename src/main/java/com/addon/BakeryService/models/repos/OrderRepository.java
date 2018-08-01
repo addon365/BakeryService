@@ -1,5 +1,6 @@
 package com.addon.BakeryService.models.repos;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
@@ -19,7 +20,7 @@ public interface OrderRepository extends PagingAndSortingRepository<SalesOrder, 
 	public Iterable<SalesOrder> findByOrderStatus(OrderStatus orderStatus);
 	
 	
-	//SalesOrder findByCustomId(Long id);
+	public SalesOrder findByExpectedDate(LocalDate ExpectedDate);
 
 	@Query("SELECT s FROM SalesOrder s WHERE (LOWER(s.orderStatus.name) != 'delivered' AND LOWER(s.orderStatus.name) !='cancelled')")
 	public Iterable<SalesOrder> getNotDelivered();
