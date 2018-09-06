@@ -1,6 +1,6 @@
 package com.addon.BakeryService.controllers;
 
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -23,6 +23,7 @@ import com.addon.BakeryService.models.Customer;
 import com.addon.BakeryService.models.OrderStatus;
 import com.addon.BakeryService.models.SalesOrder;
 import com.addon.BakeryService.models.Shop;
+import com.addon.BakeryService.models.Sms;
 import com.addon.BakeryService.models.repos.CustomerRepository;
 import com.addon.BakeryService.models.repos.OrderRepository;
 import com.addon.BakeryService.models.repos.OrderStatusRepository;
@@ -53,6 +54,11 @@ public class OrderController {
 	public @ResponseBody Iterable<SalesOrder> getOrders() {
 		return orderRepository.getNotDelivered();
 	}
+	@GetMapping("/getCount")
+	public @ResponseBody Iterable<Integer> getCounts() {
+		
+		return orderRepository.getCount();
+	}
 
 	@GetMapping("/getSalesReport")
 	public @ResponseBody Iterable<SalesOrder> getSalesReport() {
@@ -65,7 +71,9 @@ public class OrderController {
 		OrderStatus orderStatus = orderStatusRepository.findByName(status);
 		return orderRepository.findByOrderStatus(orderStatus);
 	}
-
+	
+	
+	
 	@PostMapping("/add")
 	public SalesOrder add(@RequestBody SalesOrder salesOrder) {
 

@@ -25,7 +25,8 @@ public interface OrderRepository extends PagingAndSortingRepository<SalesOrder, 
 	@Query("SELECT s FROM SalesOrder s WHERE (LOWER(s.orderStatus.name) != 'delivered' AND LOWER(s.orderStatus.name) !='cancelled')")
 	public Iterable<SalesOrder> getNotDelivered();
 	
-	
+	@Query(value="SELECT count(*) as count FROM sales_order GROUP BY order_status_id", nativeQuery = true)
+	public Iterable<Integer> getCount();
 
 //	@Query(value="SELECT * FROM sales_order ORDER BY customid DESC LIMIT 1", nativeQuery = true)
 //	public SalesOrder getMaxId();
